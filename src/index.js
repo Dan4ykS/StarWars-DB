@@ -4,6 +4,7 @@ import App from './App';
 import './css/bootstrap-reboot.min.css';
 import './css/bootstrap-grid.min.css';
 import './css/animation.css'
+import './css/loader.css'
 import './sass/index.sass';
 
 ReactDOM.render(<App />, document.getElementById('root'));
