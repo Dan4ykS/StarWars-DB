@@ -1,8 +1,8 @@
 import React from 'react';
-import '../sass/PlanetsInfo.sass';
+import '../sass/PlanetInfo.sass';
 import SWApiService from '../SWApiService'
 import Loader from './Loader';
-
+import ErrorBlock from './Error'
 
 export default class PlanetInfo extends React.Component {
   swapi = new SWApiService();
@@ -15,13 +15,21 @@ export default class PlanetInfo extends React.Component {
     orbitalPeriod:'',
     planetImg: '',
     loading: true,
+    error: false,
   };
   componentDidMount(){
     this.updatePlanet();
     // setInterval(this.updatePlanet,10000);
+  };
+  apiEror = (error) => {
+    this.setState({
+      error: true,
+      loading: false
+    })
   }
   updatePlanet = () =>{
-    const id = Math.floor(Math.random()*25)+3
+    const id = Math.floor(Math.random()*25)+3;
+    // const id = 2
     this.swapi.getPlanet(id)
     .then((planet)=>this.setState({
       name: planet.name,
@@ -32,16 +40,19 @@ export default class PlanetInfo extends React.Component {
       orbitalPeriod: planet.orbital_period,
       planetImg : `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
       loading: false
-    }));
-  }
+    }))
+    .catch(this.apiEror);
+  };
 
   render(){
-    const {loading} = this.state,
+    const {loading, error} = this.state,
+      apiEror = error ? <ErrorBlock/> : null,
       loader = loading ? <Loader/> : null,
-      content =!loading ? <Planet planet = {this.state}/> : null,
+      content = !(loading || error) ? <Planet planet = {this.state}/> : null,
       {desiredClass} = this.props
     return (
       <div className={desiredClass}>
+        {apiEror}
         {loader}
         {content}
       </div>

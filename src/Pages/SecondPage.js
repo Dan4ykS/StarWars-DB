@@ -1,9 +1,8 @@
 import React from 'react';
 import '../sass/MainPage.sass';
-import PlanetInfoBlock from '../components/PlanetsInfo'
+import PlanetInfoBlock from '../components/PlanetInfo'
 
-
-export default class App extends React.Component {
+export default class SecondPage extends React.Component {
   render(){
     return (
       <div className='row'>

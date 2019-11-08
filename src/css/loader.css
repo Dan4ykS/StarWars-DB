@@ -19,10 +19,7 @@
   }
 }
 .lds-wedges {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  
+  margin: 0 auto
 }
 .lds-wedges > div > div {
   -webkit-transform-origin: 100px 100px;

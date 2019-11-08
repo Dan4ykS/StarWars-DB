@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default class Loader extends React.Component {
-  render(){
+export default function Loader () {
     return (
       <div className="lds-css ng-scope">
         <div className="lds-wedges">
@@ -22,5 +21,4 @@ export default class Loader extends React.Component {
         </div>
      </div> 
     );
-  }
 }

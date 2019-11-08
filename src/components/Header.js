@@ -8,7 +8,8 @@ export default class Header extends React.Component {
     {name: 'ThirdPage', value: 'О нас'}
   ];
   render(){
-    const items = this.items.map(({name,value}) => {
+    const items = this.items.map(({name,value}) => 
+    {
       const {changePage = () => {} ,startPage} = this.props;
       let isActiv = startPage === name;
       return(

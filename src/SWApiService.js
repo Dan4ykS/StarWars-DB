@@ -16,8 +16,12 @@ export default class SWApiService {
     return this.getResourse(`people/${id}/`);
   }
   async getAllPlanets(){
+    const idRegExp = /\/([0-9]*)\/$/
     const result = await this.getResourse('planets/');
-    return result.results;
+    return result.results.map(({name,url})=>{
+      const id = url.match(idRegExp)[1];
+      return {name,id}
+    });
   }
   getPlanet(id){
     return this.getResourse(`planets/${id}/`);

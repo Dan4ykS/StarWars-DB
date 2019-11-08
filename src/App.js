@@ -1,10 +1,9 @@
 import React from 'react';
+import './sass/App.sass'
 import MainPage from './Pages/MainPage'
 import SecondPage from './Pages/SecondPage'
 import ThirdPage from './Pages/ThirdPage'
 import HeaderBlock from './components/Header'
-
-
 
 export default class App extends React.Component {
   state = {
@@ -35,7 +34,7 @@ export default class App extends React.Component {
         <HeaderBlock
         changePage = {this.changePage}
         startPage = {page} />
-        <div className='container'>
+        <div className='container content'>
           {visiblePage}
         </div>
       </div>
