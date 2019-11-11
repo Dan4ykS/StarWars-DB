@@ -1,19 +1,13 @@
 import React from 'react';
 import '../sass/PlanetInfo.sass';
-import SWApiService from '../SWApiService'
+import SWApiService from '../SWApiService';
 import Loader from './Loader';
 import ErrorBlock from './Error'
 
 export default class PlanetInfo extends React.Component {
   swapi = new SWApiService();
-  state= {
-    name: '',
-    population: '',
-    diametr: '',
-    rotationPeriod: '',
-    climat: '',
-    orbitalPeriod:'',
-    planetImg: '',
+  state = {
+    planet: null,
     loading: true,
     error: false,
   };
@@ -27,18 +21,13 @@ export default class PlanetInfo extends React.Component {
       loading: false
     })
   }
+
   updatePlanet = () =>{
     const id = Math.floor(Math.random()*25)+3;
-    // const id = 2
+    // const id = 24654
     this.swapi.getPlanet(id)
     .then((planet)=>this.setState({
-      name: planet.name,
-      population: planet.population, 
-      diametr: planet.diameter,
-      rotationPeriod: planet.rotation_period,
-      climat: planet.climate,
-      orbitalPeriod: planet.orbital_period,
-      planetImg : `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
+      planet: planet,
       loading: false
     }))
     .catch(this.apiEror);
@@ -48,7 +37,7 @@ export default class PlanetInfo extends React.Component {
     const {loading, error} = this.state,
       apiEror = error ? <ErrorBlock/> : null,
       loader = loading ? <Loader/> : null,
-      content = !(loading || error) ? <Planet planet = {this.state}/> : null,
+      content = !(loading || error) ? <Planet planet = {this.state.planet}/> : null,
       {desiredClass} = this.props
     return (
       <div className={desiredClass}>
@@ -61,15 +50,15 @@ export default class PlanetInfo extends React.Component {
 };
 
 function Planet ({planet}){
-  const {name,population,diametr,rotationPeriod,climat,orbitalPeriod,planetImg} = planet
+  const {name,population,diametr,rotationPeriod,climat,orbitalPeriod,id} = planet;
   return(
     <React.Fragment>
       <div className='blockHeader'>{name}</div>
-        <div className='planetsBlock__wrap'>
-          <div className='planetsBlock__img'>
-            <img src={planetImg} alt='planet'></img>
+        <div className='mainBlock__wrap'>
+          <div className='mainBlock__img'>
+            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt='planet'></img>
           </div>
-          <div className='planetsBlock__descr'>
+          <div className='mainBlock__descr'>
             <ul>
               <li><span>Население: {population}</span></li>
               <li><span>Диаметр: {diametr}</span></li>

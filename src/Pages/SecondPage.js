@@ -1,6 +1,6 @@
 import React from 'react';
 import '../sass/MainPage.sass';
-import PlanetInfoBlock from '../components/PlanetInfo'
+import PlanetInfoBlock from '../components/PlanetInfo';
 
 export default class SecondPage extends React.Component {
   render(){

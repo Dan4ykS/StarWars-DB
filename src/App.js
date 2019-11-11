@@ -1,9 +1,9 @@
 import React from 'react';
-import './sass/App.sass'
-import MainPage from './Pages/MainPage'
-import SecondPage from './Pages/SecondPage'
-import ThirdPage from './Pages/ThirdPage'
-import HeaderBlock from './components/Header'
+import './sass/App.sass';
+import MainPage from './Pages/MainPage';
+import SecondPage from './Pages/SecondPage';
+import ThirdPage from './Pages/ThirdPage';
+import HeaderBlock from './components/Header';
 
 export default class App extends React.Component {
   state = {

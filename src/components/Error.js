@@ -1,6 +1,6 @@
 import React from 'react';
-import '../sass/Error.sass'
-import DethStar from '../img/Death-star.svg'
+import '../sass/Error.sass';
+import DethStar from '../img/Death-star.svg';
 
 export default function Error () {
     return (

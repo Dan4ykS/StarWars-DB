@@ -1,22 +1,24 @@
 import React from 'react';
 import '../sass/MainPage.sass';
-import PlanetInfoBlock from '../components/PlanetInfo'
-import AllPlanetsBlock from '../components/AllPlanets'
+import PlanetInfoBlock from '../components/PlanetInfo';
+import ItemListBlock from '../components/ItemList';
+import SWApiService from '../SWApiService';
 
 export default class MainPage extends React.Component {
+  swapi = new SWApiService();
   render(){
     return (
       <div className='row'>
         <div className='col-12'>
           <PlanetInfoBlock
-          desiredClass = 'planetsBlock fadeInDown animated' />
+          desiredClass = 'mainBlock fadeInDown animated' />
         </div>
         <div className='col-lg-6'>
-          <AllPlanetsBlock />
+          <ItemListBlock getData = {this.swapi.getAllPlanets} />
         </div>
         <div className='col-lg-6'>
           <PlanetInfoBlock
-          desiredClass = 'planetsBlock fadeInRight animated' />
+          desiredClass = 'mainBlock fadeInRight animated' />
         </div>
       </div>
     );
