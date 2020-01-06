@@ -18,8 +18,12 @@
     transform: rotate(360deg);
   }
 }
-.lds-wedges {
-  margin: 0 auto
+.lds-css{
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%); 
 }
 .lds-wedges > div > div {
   -webkit-transform-origin: 100px 100px;

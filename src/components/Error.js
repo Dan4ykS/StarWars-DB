@@ -2,7 +2,7 @@ import React from 'react';
 import '../sass/Error.sass';
 import DethStar from '../img/Death-star.svg';
 
-export default function Error () {
+const Error = () => {
     return (
      <div className='error'>
        <img src={DethStar} alt='error'/>
@@ -10,3 +10,4 @@ export default function Error () {
      </div>
     );
 }
+export default Error

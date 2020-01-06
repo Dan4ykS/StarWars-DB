@@ -1,35 +1,53 @@
 import React from 'react';
 import '../sass/ItemList.sass';
 import Loader from './Loader';
-// import Loader from './Loader';
+import ErrorBlock from './Error';
 
 export default class Allitems extends React.Component {
   state = {
     items: null,
+    error: false,
+    loading: true,
   };
-  componentDidMount(){
-    const { getData } = this.props;
-    getData()
-      .then((items) => this.setState({
-        items,
-      }));
-  };
-  renderItems(arr){
-    return arr.map(({name,id}) => {
-      return(
-      <div className = 'itemName' key={id}>{name}</div>
-      );
+  apiEror = (error) => {
+    this.setState({
+      error: true,
+      loading: false,
     });
   };
-  render(){
-    const {items} = this.state,
-      loader = !items ? <Loader/> : null,
-      content = items ? this.renderItems(items) : null;
+  componentDidMount() {
+    const { getData } = this.props;
+    getData()
+      .then((items) =>
+        this.setState({
+          items,
+          loading: false,
+        })
+      )
+      .catch(this.apiEror);
+  }
+  renderItems(arr) {
+    return arr.map(({ name, id }) => {
+      const { changePlanet, planet } = this.props,
+        isActive = id === planet;
+      return (
+        <div onClick={() => changePlanet(id)} className={isActive ? 'itemName itemName_active' : 'itemName'} key={id}>
+          {name}
+        </div>
+      );
+    });
+  }
+  render() {
+    const { items, error, loading } = this.state,
+      apiEror = error ? <ErrorBlock /> : null,
+      loader = loading ? <Loader /> : null,
+      content = !(loader || error) ? this.renderItems(items) : null;
     return (
-      <div className='mainBlock fadeInLeft animated'>
+      <div className='wrap'>
+        {apiEror}
         {loader}
         {content}
       </div>
     );
   }
-};
+}
