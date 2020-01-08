@@ -4,6 +4,12 @@
   justify-content: space-around
   align-items: center
   margin: 0
+  a
+    text-decoration: none
+    color: white
+    &:hover
+      color: white
+      text-decoration: none
   &__item
     list-style-type: none
     color: white
@@ -18,12 +24,12 @@
       background-color: white
       transition: 0.5s all
 .active
-      color: red
-      &::after
-        display: block
-        content: ''
-        width: 100%
-        height: 2px
-        background-color: white        
+  color: red !important
+  &::after
+    display: block
+    content: ''
+    width: 100%
+    height: 2px
+    background-color: white
 nav
   background-color: black

@@ -41,9 +41,9 @@ const starshipsDetailsConf = (data) => {
   return (
     <>
       <RenderInfoElem data={data} fild='name' label='Имя' />
-      <RenderInfoElem data={data} fild='gender' label='Пол' />
-      <RenderInfoElem data={data} fild='height' label='Рост' />
-      <RenderInfoElem data={data} fild='hair_color' label='Цвет волос' />
+      <RenderInfoElem data={data} fild='model' label='Модель' />
+      <RenderInfoElem data={data} fild='cost' label='Цена' />
+      <RenderInfoElem data={data} fild='hyperdriveRating' label='Рейтинг гипер прыжка' />
     </>
   );
 };

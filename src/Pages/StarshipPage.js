@@ -1,10 +1,10 @@
 import React from 'react';
-import '../sass/MainPage.sass';
-import ErrorBoundry from '../components/ErrorBoundry';
-import { PersonDetails } from '../components/ItemDetails';
 import { Consumer } from '../components/ColorContext';
-
-const SecondPage = () => {
+import ErrorBoundry from '../components/ErrorBoundry';
+import { StarshipDetails } from '../components/ItemDetails';
+import { withRouter } from 'react-router-dom';
+const starshipPage = ({ match }) => {
+  const { id } = match.params;
   return (
     <Consumer>
       {(changeColor) => {
@@ -12,7 +12,7 @@ const SecondPage = () => {
           <ErrorBoundry>
             <div className='col-12'>
               <div className={`mainBlock ${changeColor} fadeInLeft animated`}>
-                <PersonDetails />
+                <StarshipDetails itemId={id} />
               </div>
             </div>
           </ErrorBoundry>
@@ -21,4 +21,4 @@ const SecondPage = () => {
     </Consumer>
   );
 };
-export default SecondPage;
+export default withRouter(starshipPage);

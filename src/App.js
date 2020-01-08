@@ -5,16 +5,24 @@ import SecondPage from './Pages/SecondPage';
 import ThirdPage from './Pages/ThirdPage';
 import HeaderBlock from './components/Header';
 import { Provider } from './components/ColorContext';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import StarshipPage from './Pages/StarshipPage';
+import Page404 from './Pages/Page404';
 
 export default class App extends React.Component {
   state = {
-    page: 'MainPage',
+    page: '',
     colorClass: '',
+    redirect: false,
   };
 
-  componentDidMount() { 
-    console.log(this.props)
-  }
+  redirectToMainPage = () => {
+    this.setState(({ redirect }) => {
+      return {
+        redirect: !redirect,
+      };
+    });
+  };
 
   rgb2hex = (rgb) => {
     const rgbColor = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -25,12 +33,14 @@ export default class App extends React.Component {
   changeColor = (newColor) => {
     const color = this.rgb2hex(document.body.style.background);
     if (newColor === color || color === '') {
-      document.body.style.background = '#ffffff';
+      document.body.style.background = '#0240efc9';
+      document.body.style.color = newColor;
       this.setState({
         colorClass: 'mainBlock__white',
       });
     } else {
       document.body.style.background = newColor;
+      document.body.style.color = '#0240efc9';
       this.setState({
         colorClass: '',
       });
@@ -39,34 +49,31 @@ export default class App extends React.Component {
   changePage = (newPage) => {
     this.setState({ page: newPage });
   };
-  renderForMainPage = () => {
-    return (
-      <Provider value={this.state.colorClass}>
-        <MainPage />
-      </Provider>
-    );
-  };
   render() {
-    const { page } = this.state;
-    let visiblePage;
-    switch (this.state.page) {
-      case 'MainPage':
-        visiblePage = this.renderForMainPage();
-        break;
-      case 'SecondPage':
-        visiblePage = <SecondPage />;
-        break;
-      case 'ThirdPage':
-        visiblePage = <ThirdPage />;
-        break;
-      default:
-        visiblePage = <MainPage />;
-        break;
-    }
+    const { page, redirect } = this.state;
     return (
       <div className='containerfluid'>
-        <HeaderBlock changeColor={this.changeColor} changePage={this.changePage} startPage={page} />
-        <div className='container content'>{visiblePage}</div>
+        <Router>
+          <HeaderBlock changeColor={this.changeColor} changePage={this.changePage} startPage={page} />
+          <div className='container content'>
+            <Provider value={this.state.colorClass}>
+              <div className='row'>
+                <Switch>
+                  <Route path='/' render={() => <h1>Добро пожаловать</h1>} exact />
+                  <Route path='/MainPage/:id([1-9]|[1-2][\d])?' component={MainPage} exact />
+                  <Route path='/SecondPage/' component={SecondPage} exact />
+                  <Route path='/ThirdPage/' component={ThirdPage} exact />
+                  <Route exact path='/ThirdPage/:id([1-9]|[1-2][\d])?' component={StarshipPage} exact />
+                  <Route
+                    render={() => {
+                      return <Page404 redirect={redirect} redirectToMainPage={this.redirectToMainPage} />;
+                    }}
+                  />
+                </Switch>
+              </div>
+            </Provider>
+          </div>
+        </Router>
       </div>
     );
   }
@@ -74,5 +81,5 @@ export default class App extends React.Component {
 
 App.defaultProps = {
   fjwifj: 89,
-  updateInterval: () => { },
-}
+  updateInterval: () => {},
+};

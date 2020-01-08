@@ -1,18 +1,21 @@
 import React from 'react';
 import '../sass/Header.sass';
 import ChangeColorBtn from './ChangeColor';
+import { Link} from 'react-router-dom'
 
 const Header = ({ changeColor, changePage, startPage }) => {
   const items = [
-    { name: 'MainPage', value: 'Главная' },
-    { name: 'SecondPage', value: 'Больше инофрмации' },
-    { name: 'ThirdPage', value: 'О нас' },
+    { name: '/MainPage/', value: 'Главная' },
+    { name: '/SecondPage/', value: 'Информация о персонажах' },
+    { name: '/ThirdPage/', value: 'Список кораблей' },
   ];
   const allItems = items.map(({ name, value }) => {
     let isActiv = startPage === name;
     return (
       <li onClick={() => changePage(name)} key={name} className={isActiv ? 'header__item active' : 'header__item'}>
-        {value}
+        <Link key={name} className={isActiv ? 'header__item active' : 'header__item'} to={name}>
+          {value}
+        </Link>
       </li>
     );
   });

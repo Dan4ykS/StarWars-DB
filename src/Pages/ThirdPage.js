@@ -1,9 +1,31 @@
 import React from 'react';
+import { StarshipsList } from '../components/ItemList';
+import ErrorBoundry from '../components/ErrorBoundry';
+import { Consumer } from '../components/ColorContext';
+import { withRouter } from 'react-router-dom';
 
-export default class ThirdPage extends React.Component {
-  render(){
-    return (
-      <h2>Страница 3</h2>
-    );
-  }
-}
+const ThirdPage = ({ history, match }) => {
+  const { id } = match.params;
+  return (
+    <Consumer>
+      {(changeColor) => {
+        return (
+          <ErrorBoundry>
+            <div className='col-12'>
+              <div className={`mainBlock ${changeColor} fadeInDown animated`}>
+                <StarshipsList
+                  itemid={id}
+                  changeItem={(itemid) => {
+                    history.push(`${itemid}`);
+                  }}
+                />
+              </div>
+            </div>
+          </ErrorBoundry>
+        );
+      }}
+    </Consumer>
+  );
+};
+
+export default withRouter(ThirdPage);

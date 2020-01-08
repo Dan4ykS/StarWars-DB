@@ -20,10 +20,8 @@ const uploadLogicForComp = (getData, View, getImg = undefined, type = undefined)
 
     componentDidMount() {
       this.updatePlanet();
-      console.log(this.props);
       if (this.props.itemId === undefined) {
-        
-        setInterval(this.updatePlanet, 5000);
+        setInterval(this.updatePlanet, 50000);
       }
     }
 
@@ -44,7 +42,7 @@ const uploadLogicForComp = (getData, View, getImg = undefined, type = undefined)
         id = this.props.itemId;
       }
       getData(id)
-        .then((data) =>
+        .then((data) => 
           this.setState({
             data,
             loading: false,
