@@ -1,55 +1,70 @@
 import React from 'react';
 import '../sass/MainPage.sass';
-import ItemListBlock from '../components/ItemList';
 import SWApiService from '../SWApiService';
 import ErrorBoundry from '../components/ErrorBoundry';
-import InfoBlock from '../components/ItemInfo';
-import RenderInfoElem from '../components/RenderInfo';
+import { PersonsList, PlanetsList, StarshipsList } from '../components/ItemList';
+import { PersonDetails, PlanetDetails, StarshipDetails } from '../components/ItemDitails';
+import { Consumer } from '../components/ColorContext';
 
 export default class MainPage extends React.Component {
   swapi = new SWApiService();
   state = {
     planetId: 2,
+    personId: 1,
   };
 
   changePlanet = (id) => {
     this.setState({ planetId: id });
   };
 
+  changePerson = (id) => {
+    this.setState({ personId: id });
+  };
+
   render() {
     return (
       <div className='row'>
-        <ErrorBoundry>
-          <div className='col-12'>
-            <div className='mainBlock fadeInDown animated'>
-              <InfoBlock getItem={this.swapi.getPerson} getImgUrl={this.swapi.getPersonImg}>
-                <RenderInfoElem fild='name' label='Имя' />
-                <RenderInfoElem fild='gender' label='Пол' />
-                <RenderInfoElem fild='height' label='Рост' />
-                <RenderInfoElem fild='hair_color' label='Цвет волос' />
-              </InfoBlock>
-            </div>
-          </div>
-        </ErrorBoundry>
-        <ErrorBoundry>
-          <div className='col-6'>
-            <div className='mainBlock fadeInLeft animated'>
-              <ItemListBlock getData={this.swapi.getAllPlanets} changePlanet={this.changePlanet} planet={this.state.planetId}></ItemListBlock>
-            </div>
-          </div>
-        </ErrorBoundry>
-        <ErrorBoundry>
-          <div className='col-6'>
-            <div className='mainBlock fadeInRight animated'>
-              <InfoBlock getItem={this.swapi.getPlanet} itemId={this.state.planetId} getImgUrl={this.swapi.getPlanetImg}>
-                <RenderInfoElem fild='name' label='Название планеты' />
-                <RenderInfoElem fild='diameter' label='Диаметр' />
-                <RenderInfoElem fild='orbital_period' label='Период вращения' />
-                <RenderInfoElem fild='population' label='Население' />
-              </InfoBlock>
-            </div>
-          </div>
-        </ErrorBoundry>
+        <Consumer>
+          {(colorClass) => {
+            return (
+              <ErrorBoundry>
+                <div className='col-12'>
+                  <div className={`mainBlock ${colorClass} fadeInDown animated`}>
+                    <PersonDetails arr={this.state.personId} />
+                  </div>
+                </div>
+              </ErrorBoundry>
+            );
+          }}
+        </Consumer>
+
+        <Consumer>
+          {(colorClass) => {
+            return (
+              <ErrorBoundry>
+                <div className='col-6'>
+                  <div className={`mainBlock ${colorClass} fadeInLeft animated`}>
+                    <PlanetsList changeItem={this.changePlanet} itemId={this.state.planetId} />
+                  </div>
+                </div>
+              </ErrorBoundry>
+            );
+          }}
+        </Consumer>
+
+        <Consumer>
+          {(colorClass) => {
+            return (
+              <ErrorBoundry>
+                <div className='col-6'>
+                  <div className={`mainBlock ${colorClass} fadeInDown animated `}>
+                    <PlanetDetails itemId={this.state.planetId} />
+                  </div>
+                </div>
+              </ErrorBoundry>
+            );
+          }}
+        </Consumer>
       </div>
     );
   }
