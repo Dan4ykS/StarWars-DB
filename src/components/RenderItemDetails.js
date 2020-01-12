@@ -37,6 +37,7 @@ const personsDetailsConf = (data) => {
     </>
   );
 };
+
 const starshipsDetailsConf = (data) => {
   return (
     <>
@@ -47,6 +48,7 @@ const starshipsDetailsConf = (data) => {
     </>
   );
 };
+
 const planetsDetailsConf = (data) => {
   return (
     <>
@@ -57,6 +59,7 @@ const planetsDetailsConf = (data) => {
     </>
   );
 };
+
 const RenderItemDetails = (props) => {
   const { data, img, type } = props;
   const content = type === 'planet' ? planetsDetailsConf(data) : type === 'person' ? personsDetailsConf(data) : type === 'starship' ? starshipsDetailsConf(data) : null;

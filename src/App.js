@@ -30,25 +30,28 @@ export default class App extends React.Component {
       ? '#' + ('0' + parseInt(rgbColor[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgbColor[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgbColor[3], 10).toString(16)).slice(-2)
       : '';
   };
+
   changeColor = (newColor) => {
     const color = this.rgb2hex(document.body.style.background);
     if (newColor === color || color === '') {
-      document.body.style.background = '#0240efc9';
+      document.body.style.background = '#fff';
       document.body.style.color = newColor;
       this.setState({
         colorClass: 'mainBlock__white',
       });
     } else {
       document.body.style.background = newColor;
-      document.body.style.color = '#0240efc9';
+      document.body.style.color = '#fff';
       this.setState({
         colorClass: '',
       });
     }
   };
+
   changePage = (newPage) => {
     this.setState({ page: newPage });
   };
+
   render() {
     const { page, redirect } = this.state;
     return (
@@ -63,7 +66,7 @@ export default class App extends React.Component {
                   <Route path='/MainPage/:id([1-9]|[1-2][\d])?' component={MainPage} exact />
                   <Route path='/SecondPage/' component={SecondPage} exact />
                   <Route path='/ThirdPage/' component={ThirdPage} exact />
-                  <Route exact path='/ThirdPage/:id([1-9]|[1-2][\d])?' component={StarshipPage} exact />
+                  <Route path='/ThirdPage/:id([1-9]|[1-2][\d])?' component={StarshipPage} exact />
                   <Route
                     render={() => {
                       return <Page404 redirect={redirect} redirectToMainPage={this.redirectToMainPage} />;
@@ -79,7 +82,8 @@ export default class App extends React.Component {
   }
 }
 
-App.defaultProps = {
-  fjwifj: 89,
-  updateInterval: () => {},
-};
+// Назначение свойств по умолчанию
+// App.defaultProps = {
+//   fjwifj: 89,
+//   updateInterval: () => {},
+// };

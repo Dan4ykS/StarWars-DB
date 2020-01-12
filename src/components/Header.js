@@ -1,7 +1,7 @@
 import React from 'react';
 import '../sass/Header.sass';
 import ChangeColorBtn from './ChangeColor';
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Header = ({ changeColor, changePage, startPage }) => {
   const items = [
@@ -9,6 +9,7 @@ const Header = ({ changeColor, changePage, startPage }) => {
     { name: '/SecondPage/', value: 'Информация о персонажах' },
     { name: '/ThirdPage/', value: 'Список кораблей' },
   ];
+  
   const allItems = items.map(({ name, value }) => {
     let isActiv = startPage === name;
     return (

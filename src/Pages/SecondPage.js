@@ -1,5 +1,4 @@
 import React from 'react';
-import '../sass/MainPage.sass';
 import ErrorBoundry from '../components/ErrorBoundry';
 import { PersonDetails } from '../components/ItemDetails';
 import { Consumer } from '../components/ColorContext';
@@ -21,4 +20,5 @@ const SecondPage = () => {
     </Consumer>
   );
 };
+
 export default SecondPage;

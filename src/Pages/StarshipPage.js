@@ -3,6 +3,7 @@ import { Consumer } from '../components/ColorContext';
 import ErrorBoundry from '../components/ErrorBoundry';
 import { StarshipDetails } from '../components/ItemDetails';
 import { withRouter } from 'react-router-dom';
+
 const starshipPage = ({ match }) => {
   const { id } = match.params;
   return (
@@ -21,4 +22,5 @@ const starshipPage = ({ match }) => {
     </Consumer>
   );
 };
+
 export default withRouter(starshipPage);

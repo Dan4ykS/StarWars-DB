@@ -1,5 +1,4 @@
 import React from 'react';
-import '../sass/MainPage.sass';
 import ErrorBoundry from '../components/ErrorBoundry';
 import { PlanetsList } from '../components/ItemList';
 import { PersonDetails, PlanetDetails } from '../components/ItemDetails';
@@ -30,7 +29,7 @@ const MainPage = ({ history, match }) => {
             <ErrorBoundry>
               <div className='col-6'>
                 <div className={`mainBlock ${colorClass} fadeInLeft animated`}>
-                  <PlanetsList changeItem={(id) => history.push(`${id}`)} itemId={id} />
+                  <PlanetsList changeColor={colorClass} changeItem={(id) => history.push(`${id}`)} itemId={id} />
                 </div>
               </div>
             </ErrorBoundry>
@@ -54,4 +53,5 @@ const MainPage = ({ history, match }) => {
     </>
   );
 };
+
 export default withRouter(MainPage);

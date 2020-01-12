@@ -42,7 +42,7 @@ const uploadLogicForComp = (getData, View, getImg = undefined, type = undefined)
         id = this.props.itemId;
       }
       getData(id)
-        .then((data) => 
+        .then((data) =>
           this.setState({
             data,
             loading: false,
@@ -67,6 +67,5 @@ const uploadLogicForComp = (getData, View, getImg = undefined, type = undefined)
     }
   };
 };
-
 
 export default uploadLogicForComp;
