@@ -12,9 +12,21 @@ import Page404 from './Pages/Page404';
 export default class App extends React.Component {
   state = {
     page: '',
-    colorClass: '',
+    colorClass: localStorage.getItem('theme'),
     redirect: false,
   };
+
+  componentDidMount() {
+    if (localStorage.length !== 0) {
+      this.theme(localStorage);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.colorClass !== localStorage.getItem('theme')) {
+      this.theme(localStorage);
+    }
+  }
 
   redirectToMainPage = () => {
     this.setState(({ redirect }) => {
@@ -22,6 +34,11 @@ export default class App extends React.Component {
         redirect: !redirect,
       };
     });
+  };
+
+  theme = (localStorage) => {
+    document.body.style.background = localStorage.getItem('bgColor');
+    document.body.style.color = localStorage.getItem('textColor');
   };
 
   rgb2hex = (rgb) => {
@@ -34,16 +51,18 @@ export default class App extends React.Component {
   changeColor = (newColor) => {
     const color = this.rgb2hex(document.body.style.background);
     if (newColor === color || color === '') {
-      document.body.style.background = '#fff';
-      document.body.style.color = newColor;
+      localStorage.setItem('bgColor', '#fff');
+      localStorage.setItem('textColor', '#1f1f1f');
+      localStorage.setItem('theme', 'mainBlock__white');
       this.setState({
-        colorClass: 'mainBlock__white',
+        colorClass: localStorage.getItem('theme'),
       });
     } else {
-      document.body.style.background = newColor;
-      document.body.style.color = '#fff';
+      localStorage.setItem('bgColor', '#1f1f1f');
+      localStorage.setItem('textColor', '#fff');
+      localStorage.setItem('theme', '');
       this.setState({
-        colorClass: '',
+        colorClass: localStorage.getItem('theme'),
       });
     }
   };

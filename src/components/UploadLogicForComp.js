@@ -25,7 +25,7 @@ const uploadLogicForComp = (getData, View, getImg = undefined, type = undefined)
       }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
       if (this.props.itemId !== prevProps.itemId && getImg !== undefined) {
         this.setState({
           loading: true,

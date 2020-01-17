@@ -3,7 +3,6 @@ import '../sass/ItemList.sass';
 
 const allItems = (props) => {
   const { data, changeItem, itemId, changeColor } = props;
-  console.log(changeColor)
   const allItems = data.map(({ name, id }) => {
     const isActive = id === +itemId,
       activeColor = changeColor === '' ? 'itemName_active' : 'itemName_activeWhite';
