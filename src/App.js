@@ -22,12 +22,6 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.colorClass !== localStorage.getItem('theme')) {
-      this.theme(localStorage);
-    }
-  }
-
   redirectToMainPage = () => {
     this.setState(({ redirect }) => {
       return {
@@ -39,6 +33,9 @@ export default class App extends React.Component {
   theme = (localStorage) => {
     document.body.style.background = localStorage.getItem('bgColor');
     document.body.style.color = localStorage.getItem('textColor');
+    this.setState({
+      colorClass: localStorage.getItem('theme'),
+    });
   };
 
   rgb2hex = (rgb) => {
@@ -54,16 +51,12 @@ export default class App extends React.Component {
       localStorage.setItem('bgColor', '#fff');
       localStorage.setItem('textColor', '#1f1f1f');
       localStorage.setItem('theme', 'mainBlock__white');
-      this.setState({
-        colorClass: localStorage.getItem('theme'),
-      });
+      this.theme(localStorage);
     } else {
       localStorage.setItem('bgColor', '#1f1f1f');
       localStorage.setItem('textColor', '#fff');
       localStorage.setItem('theme', '');
-      this.setState({
-        colorClass: localStorage.getItem('theme'),
-      });
+      this.theme(localStorage);
     }
   };
 

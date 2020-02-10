@@ -14,7 +14,7 @@ const Header = ({ changeColor, changePage, startPage }) => {
     let isActiv = startPage === name;
     return (
       <li onClick={() => changePage(name)} key={name} className={isActiv ? 'header__item active' : 'header__item'}>
-        <Link key={name} className={isActiv ? 'header__item active' : 'header__item'} to={name}>
+        <Link key={name} to={name}>
           {value}
         </Link>
       </li>
